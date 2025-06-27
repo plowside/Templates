@@ -40,40 +40,6 @@ class AsyncPostgresDB:
 						referrer_from_user_id BIGINT REFERENCES users(id),
 						created_at BIGINT
 					)
-				''',
-				'requests': '''
-					CREATE TABLE IF NOT EXISTS requests(
-						id SERIAL PRIMARY KEY,
-						uuid TEXT,
-						user_id SERIAL REFERENCES users(id),
-						req_type TEXT,
-						req_sub_type TEXT,
-						questions_answers TEXT,
-						completed BOOL DEFAULT False,
-						created_at BIGINT
-					)
-				''',
-				'dialogues': '''
-					CREATE TABLE IF NOT EXISTS dialogues(
-						id SERIAL PRIMARY KEY,
-						admin_user_id SERIAL REFERENCES users(id),
-						user_id SERIAL REFERENCES users(id),
-						show BOOL DEFAULT True,
-						created_at BIGINT
-					)
-				''',
-				'dialogue_messages': '''
-					CREATE TABLE IF NOT EXISTS dialogue_messages(
-						id SERIAL PRIMARY KEY,
-						dialogue_id SERIAL REFERENCES dialogues(id),
-						message_id BIGINT,
-						message_content_type TEXT,
-						message_text TEXT,
-						from_user_id SERIAL REFERENCES users(id),
-						from_user_tg_id BIGINT,
-						from_user_type TEXT,
-						created_at BIGINT
-					)
 				'''
 			}
 
