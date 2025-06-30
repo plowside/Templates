@@ -25,3 +25,6 @@ def sql_where_format(sql, **kwargs) -> tuple[str, list]:
 		sql += ' WHERE '
 		sql += ' AND '.join([f'{item} = ${i}' for i, item in enumerate(kwargs, start=1)])
 	return sql, values
+
+def get_unix():
+	return int(time.time())

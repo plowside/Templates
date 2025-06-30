@@ -4,7 +4,6 @@ from typing import Optional
 
 from .database import db
 from .db_helper import *
-from utils.functions import get_unix
 
 
 # Модель таблицы
@@ -27,7 +26,7 @@ class Userx:
 		async with db.pool.acquire() as conn:
 			sql = f'INSERT INTO users'
 			sql, params = sql_insert_format(sql, tg_user_id=user_id, tg_username=username, tg_firstname=firstname, created_at=unix, **kwargs)
-			resp = await conn.fetchrow(sql, *params)
+			resp = await conn.execute(sql, *params)
 
 		return await Userx.get(tg_user_id=user_id)
 
